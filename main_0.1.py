@@ -1,7 +1,10 @@
 from flask import Flask, jsonify, request
-
+from flask_pymongo import PyMongo
 
 app = Flask(__name__)
+app.secret_key = "super-secret-key"
+app.config['MONGO_URI'] = 'mongodb://localhost/busL'
+mongo = PyMongo(app)
 
 
 @app.route('/api/test')
@@ -14,7 +17,18 @@ def latlon():
     if request.method == 'POST':
         content = request.get_json()
         print(content)
-    return "ok"
+    if request.method == 'GET':
+        pass
+
+    return 201
+
+
+@app.route('/api/nfc', methods=['GET', 'POST'])
+def nfc():
+    if request.method == 'POST':
+        content = request.get_json()
+        print(content)
+    return 201
 
 
 if __name__ == '__main__':
