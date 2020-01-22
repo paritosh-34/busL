@@ -60,28 +60,6 @@ def latlon():
     return "No method"
 
 
-@app.route('/api/nfc', methods=['GET', 'POST'])
-def nfc():
-    if request.method == 'POST':
-        content = request.get_json()
-        print(content)
-    if request.method == 'GET':
-        pass
-
-    return 201
-
-
-@app.route('/api/admin', methods=['GET', 'POST'])
-def admin():
-    # cur = mysql.connection.cursor()
-    # if request.method == 'POST':
-    # query = '''SELECT * FROM users'''
-    # cur.execute(query)
-    # res = cur.fetchall()
-    # print(res)
-    return "admin Ji"
-
-
 @app.route('/logout')
 def logout():
     session.pop('user')
