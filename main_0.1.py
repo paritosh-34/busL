@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request, render_template, session, redirect
 # from flask_mysqldb import MySQL
 from flask_pymongo import PyMongo
+import json
 
 app = Flask(__name__)
 app.secret_key = "super-secret-key"
@@ -16,7 +17,7 @@ mongo = PyMongo(app)
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if 'user' in session:
-        return "Welcome "+session['user']+"!"
+        return "Welcome "+session['user']+"!" + "<br>" + '''<a href="/logout">Logout</a>'''
 
     if request.method == 'POST':
         username = request.form.get('email')
@@ -29,7 +30,7 @@ def home():
             return render_template('login.html', i="invalid Id/Password")
         else:
             session['user'] = username
-            return "Welcome " + session['user'] + "!"
+            return redirect('/')
 
     return render_template('login.html')
 
@@ -58,6 +59,48 @@ def latlon():
         mongo.db.location.insert({'lat': lat, 'lon': lon})
         return "ok"
     return "No method"
+
+
+@app.route('/buses')
+def buses():
+    result = mongo.db.seats.find()
+    list_r = list(result)
+    print(list_r)
+    return render_template('bus.html', posts=list_r)
+
+
+@app.route('/cbuses', methods=['GET', 'POST'])
+def cbuses():
+    if request.method == 'POST':
+        re = request.get_json()
+        print(type(re))
+        print("-->", re)
+
+        for i in re:
+            print(i, re[i])
+            mongo.db.seats.update({'no': i}, {'info': re[i]})
+
+    result = mongo.db.seats.find()
+    list_r = list(result)
+    print(list_r)
+    return render_template('busC.html', posts=list_r)
+
+
+@app.route('/cbuses/r', methods=['GET', 'POST'])
+def Rcbuses():
+    if request.method == 'POST':
+        re = request.get_json()
+        print(type(re))
+        print("-->", re)
+
+        for i in re:
+            print(i, re[i])
+            mongo.db.seats.update({'no': i}, {'info': re[i]})
+
+    result = mongo.db.seats.find()
+    list_r = list(result)
+    print(list_r)
+    return render_template('busC2.html', posts=list_r)
 
 
 @app.route('/logout')
