@@ -2,7 +2,7 @@ import requests
 import json
 import time
 
-my_url = "http://127.0.0.1:5000/post?lat=1.0.3.4&lon=1.2.0.4"
+my_url = "http://35.173.150.151:5000/post?lat=1.0.3.4&lon=1.2.0.4"
 # Change the url respectively
 
 while True:
