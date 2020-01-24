@@ -69,7 +69,7 @@ def buses():
 
 @app.route('/cbuses', methods=['GET', 'POST'])
 def cbuses():
-    if 'user' in session and session['user']=="cd1@gmail.com":
+    if 'user' in session and (session['user'] == "cd1@gmail.com" or session['user'] == "admin@gmail.com"):
         if request.method == 'POST':
             re = request.get_json()
             print(type(re))
@@ -110,6 +110,11 @@ def Rcbuses():
 @app.route('/map')
 def map():
     return render_template('index3.html')
+
+
+@app.route('/set')
+def set():
+    return render_template('conductor.html')
 
 
 @app.route('/logout')
