@@ -71,36 +71,47 @@ def buses():
 
 @app.route('/cbuses', methods=['GET', 'POST'])
 def cbuses():
-    if request.method == 'POST':
-        re = request.get_json()
-        print(type(re))
-        print("-->", re)
+    if 'user' in session and session['user']=="cd1@gmail.com":
+        if request.method == 'POST':
+            re = request.get_json()
+            print(type(re))
+            print("-->", re)
 
-        for i in re:
-            print(i, re[i])
-            mongo.db.seats.update({'no': i}, {'info': re[i]})
+            for i in re:
+                print(i, re[i])
+                mongo.db.seats.update({'no': i}, {'info': re[i]})
 
-    result = mongo.db.seats.find()
-    list_r = list(result)
-    print(list_r)
-    return render_template('busC.html', posts=list_r)
+        result = mongo.db.seats.find()
+        list_r = list(result)
+        print(list_r)
+        return render_template('busC.html', posts=list_r)
+    else:
+        return "Not Allowed"
 
 
 @app.route('/cbuses/r', methods=['GET', 'POST'])
 def Rcbuses():
-    if request.method == 'POST':
-        re = request.get_json()
-        print(type(re))
-        print("-->", re)
+    if 'user' in session and (session['user'] == "cd1@gmail.com" or session['user'] == "admin@gmail.com"):
+        if request.method == 'POST':
+            re = request.get_json()
+            print(type(re))
+            print("-->", re)
 
-        for i in re:
-            print(i, re[i])
-            mongo.db.seats.update({'no': i}, {'info': re[i]})
+            for i in re:
+                print(i, re[i])
+                mongo.db.seats.update({'no': i}, {'info': re[i]})
 
-    result = mongo.db.seats.find()
-    list_r = list(result)
-    print(list_r)
-    return render_template('busC2.html', posts=list_r)
+        result = mongo.db.seats.find()
+        list_r = list(result)
+        print(list_r)
+        return render_template('busC2.html', posts=list_r)
+    else:
+        return "Not Allowed"
+
+
+@app.route('/map')
+def map():
+    return render_template('index3.html')
 
 
 @app.route('/logout')
