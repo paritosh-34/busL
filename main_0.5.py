@@ -57,7 +57,12 @@ def latlon():
     print(lat)
     print(lon)
     mongo.db.location.insert({'lat': lat, 'lon': lon})
-    return "ok"
+    data = {
+            "temp" : "tempC",
+            "time" : "timee"
+        }
+    y = json.dumps(data)
+    return y
 #     return "Not a valid method"
 
 
