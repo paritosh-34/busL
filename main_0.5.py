@@ -43,6 +43,7 @@ def mlogin():
         print(content)
         my_json = content.decode('utf8')
         data = json.loads(my_json)
+        print(data)d
         s = json.dumps(data, indent=4, sort_keys=True)
         print(s)
         print(type(s))
