@@ -51,12 +51,14 @@ def test_api():
 
 @app.route('/post', methods=['GET', 'POST'])
 def latlon():
-    lat = request.args.get('lat')
-    lon = request.args.get('lon')
-    print(lat)
-    print(lon)
-    mongo.db.location.insert({'lat': lat, 'lon': lon})
-    return "ok"
+    if request.method == 'POST:
+        lat = request.args.get('lat')
+        lon = request.args.get('lon')
+        print(lat)
+        print(lon)
+        mongo.db.location.insert({'lat': lat, 'lon': lon})
+        return "ok"
+    return "Not a valid method"
 
 
 @app.route('/buses')
