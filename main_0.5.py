@@ -38,7 +38,7 @@ def home():
 @app.route('/mlogin', methods=['GET', 'POST'])
 def mlogin():
     if request.method == 'POST':
-        content = request.body
+        content = request.body()
         print(type(content))
         print(content)
 #         email = content['email']
