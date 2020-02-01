@@ -52,10 +52,10 @@ def test_api():
 @app.route('/post', methods=['GET', 'POST'])
 def latlon():
 #     if request.method == 'POST':
-    lat = request.args.get('lat')
-    lon = request.args.get('lon')
-    print(lat)
-    print(lon)
+    content = request.get_json()
+    # z = json.loads(content)
+    lat = content['lat']
+    lon = content['lon']
     mongo.db.location.insert({'lat': lat, 'lon': lon})
     data = {
             "temp" : "tempC",
