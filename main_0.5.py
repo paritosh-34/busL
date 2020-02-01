@@ -35,6 +35,25 @@ def home():
     return render_template('login.html')
 
 
+@app.route('/mlogin', methods=['GET', 'POST'])
+def mlogin():
+    if request.method == 'POST':
+        content = request.get_json()
+        print(content)
+        email = content['email']
+        password = content['password']
+        flag = content['flag']
+        fcm_token = content['fcm_token']
+        re = mongo.db.users.find_one({"name": email, "pass": password})
+        print(re)
+        if re is None:
+            return "0"
+        else:
+            # session['user'] = username
+            return "1"
+    return "wrong method"
+
+
 @app.route('/locs')
 def locations():
     if 'user' in session and session['user'] == "admin@gmail.com":
@@ -54,7 +73,7 @@ def latlon():
     if request.method == 'POST':
         content = request.get_json()
         # z = json.loads(content)
-        lat = content['lat']
+        lat = content['lat']  # flag, email, password, fcm_token
         lon = content['lon']
         mongo.db.location.insert({'lat': lat, 'lon': lon})
         data = {
