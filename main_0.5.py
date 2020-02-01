@@ -49,34 +49,34 @@ def mlogin():
         print(type(data))
         print(data["email"])
 
-#         email = content['email']
-#         password = content['password']
+        email = data['email']
+        password = data['password']
 #         flag = content['flag']
 #         fcm_token = content['fcm_token']
-#         re = mongo.db.users.find_one({"name": email, "pass": password})
+        re = mongo.db.users.find_one({"name": email, "pass": password})
 
-#         print(re)
-#         if re is None:
-#             data = {
-#                 "value": 0,
-#                 "message": "not ok",
-#                 "email": email,
-#                 "name": email,
-#                 "id": "123"
-#             }
-#             y = json.dumps(data)
-#             return y
-#         else:
-#             # session['user'] = username
-#             data = {
-#                 "value": 1,
-#                 "message": "ok",
-#                 "email": email,
-#                 "name": email,
-#                 "id": "123"
-#             }
-#             y = json.dumps(data)
-#             return y
+        print(re)
+        if re is None:
+            data = {
+                "value": 0,
+                "message": "not ok",
+                "email": email,
+                "name": email,
+                "id": "123"
+            }
+            y = json.dumps(data)
+            return y
+        else:
+            # session['user'] = username
+            data = {
+                "value": 1,
+                "message": "ok",
+                "email": email,
+                "name": email,
+                "id": "123"
+            }
+            y = json.dumps(data)
+            return y
     return "wrong method"
 
 
