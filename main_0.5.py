@@ -39,7 +39,7 @@ def home():
 def mlogin():
     if request.method == 'POST':
         content = request.get_json()
-        print(typeof(content))
+        print(type(content))
         print(content)
 #         email = content['email']
 #         password = content['password']
