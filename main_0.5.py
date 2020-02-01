@@ -41,9 +41,9 @@ def mlogin():
         content = request.data
         print(type(content))
         print(content)
-        my_json = content.decode('utf8')
+        my_json = content.decode('utf8').replace("'", '"')
         data = json.loads(my_json)
-        print(data)d
+        print(data)
         s = json.dumps(data, indent=4, sort_keys=True)
         print(s)
         print(type(s))
