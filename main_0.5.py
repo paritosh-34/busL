@@ -45,12 +45,29 @@ def mlogin():
         flag = content['flag']
         fcm_token = content['fcm_token']
         re = mongo.db.users.find_one({"name": email, "pass": password})
+
         print(re)
         if re is None:
-            return "0"
+            data = {
+                "value": 0,
+                "message": "not ok",
+                "email": email,
+                "name": email,
+                "id": 123
+            }
+            y = json.dumps(data)
+            return y
         else:
             # session['user'] = username
-            return "1"
+            data = {
+                "value": 1,
+                "message": "ok",
+                "email": email,
+                "name": email,
+                "id": 123
+            }
+            y = json.dumps(data)
+            return y
     return "wrong method"
 
 
