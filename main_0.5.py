@@ -51,7 +51,7 @@ def test_api():
 
 @app.route('/post', methods=['GET', 'POST'])
 def latlon():
-    if request.method == 'POST:
+    if request.method == 'POST':
         lat = request.args.get('lat')
         lon = request.args.get('lon')
         print(lat)
