@@ -51,18 +51,19 @@ def test_api():
 
 @app.route('/post', methods=['GET', 'POST'])
 def latlon():
-#     if request.method == 'POST':
-    content = request.get_json()
-    # z = json.loads(content)
-    lat = content['lat']
-    lon = content['lon']
-    mongo.db.location.insert({'lat': lat, 'lon': lon})
-    data = {
-            "temp" : "tempC",
-            "time" : "timee"
-        }
-    y = json.dumps(data)
-    return y
+    if request.method == 'POST':
+        content = request.get_json()
+        # z = json.loads(content)
+        lat = content['lat']
+        lon = content['lon']
+        mongo.db.location.insert({'lat': lat, 'lon': lon})
+        data = {
+                "temp" : "tempC",
+                "time" : "timee"
+            }
+        y = json.dumps(data)
+        return y
+    return "method not allowed"
 #     return "Not a valid method"
 
 
