@@ -27,10 +27,10 @@ def home():
         re = mongo.db.users.find_one({"name": username, "pass": userpass})
         print(re)
         if re is None:
-            return render_template('login.html', i="invalid Id/Password")
+            return False
         else:
             session['user'] = username
-            return redirect('/')
+            return True
 
     return render_template('login.html')
 
