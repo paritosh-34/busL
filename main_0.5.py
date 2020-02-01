@@ -45,9 +45,9 @@ def mlogin():
         data = json.loads(my_json)
         print(data)
         s = json.dumps(data, indent=4, sort_keys=True)
-        print(s)
-        print(type(s))
-        print(s["email"])
+        print(data)
+        print(type(data))
+        print(data["email"])
 
 #         email = content['email']
 #         password = content['password']
