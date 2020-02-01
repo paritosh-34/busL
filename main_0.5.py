@@ -53,7 +53,7 @@ def mlogin():
                 "message": "not ok",
                 "email": email,
                 "name": email,
-                "id": 123
+                "id": "123"
             }
             y = json.dumps(data)
             return y
@@ -64,7 +64,7 @@ def mlogin():
                 "message": "ok",
                 "email": email,
                 "name": email,
-                "id": 123
+                "id": "123"
             }
             y = json.dumps(data)
             return y
